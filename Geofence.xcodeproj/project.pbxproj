@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A0C8B839A6DEF574662E25EE /* Pods_Geofence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1256AB136A28F5C573B9D53F /* Pods_Geofence.framework */; };
+		F436180D2D5CE2AC00DBA76A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F436180C2D5CE2AC00DBA76A /* MainView.swift */; };
 		F49D60C22D5CA52900B65C63 /* GeofenceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D60C12D5CA52900B65C63 /* GeofenceApp.swift */; };
 		F49D60C42D5CA52900B65C63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D60C32D5CA52900B65C63 /* ContentView.swift */; };
 		F49D60C62D5CA52900B65C63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49D60C52D5CA52900B65C63 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		1256AB136A28F5C573B9D53F /* Pods_Geofence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Geofence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5733C33D87E3ADCDDFEE7FCF /* Pods-Geofence.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geofence.debug.xcconfig"; path = "Target Support Files/Pods-Geofence/Pods-Geofence.debug.xcconfig"; sourceTree = "<group>"; };
 		CA093E444E950EB355725554 /* Pods-Geofence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geofence.release.xcconfig"; path = "Target Support Files/Pods-Geofence/Pods-Geofence.release.xcconfig"; sourceTree = "<group>"; };
+		F436180C2D5CE2AC00DBA76A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F49D60BE2D5CA52900B65C63 /* Geofence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geofence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49D60C12D5CA52900B65C63 /* GeofenceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceApp.swift; sourceTree = "<group>"; };
 		F49D60C32D5CA52900B65C63 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				F49D60C32D5CA52900B65C63 /* ContentView.swift */,
+				F436180C2D5CE2AC00DBA76A /* MainView.swift */,
 				F49D60D52D5CA5E700B65C63 /* GoogleMapView.swift */,
 			);
 			path = View;
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49D60C42D5CA52900B65C63 /* ContentView.swift in Sources */,
+				F436180D2D5CE2AC00DBA76A /* MainView.swift in Sources */,
 				F49D60C22D5CA52900B65C63 /* GeofenceApp.swift in Sources */,
 				F49D60D82D5CA61800B65C63 /* MapViewController.swift in Sources */,
 				F49D60D32D5CA5D200B65C63 /* LocationManager.swift in Sources */,
