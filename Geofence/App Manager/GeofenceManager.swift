@@ -11,12 +11,12 @@ class GeofenceManager: ObservableObject {
 
     @Published var isUserInsideGeofence: Bool = false  // ✅ Track if user is inside a geofence
 
-    //Adding coordinates to "[[CLLocationCoordinate2D]]" array
+    // Adding coordinates to "[[CLLocationCoordinate2D]]" array
     func startDrawing() {
         geofenceCoordinates.append([])
     }
 
-    //Append coordinate at last index of array
+    // Append coordinate at last index of array
     func addCoordinate(_ coordinate: CLLocationCoordinate2D) {
         geofenceCoordinates[geofenceCoordinates.count - 1].append(coordinate)
     }
@@ -28,6 +28,11 @@ class GeofenceManager: ObservableObject {
         let path = GMSMutablePath()
         for coordinate in lastGeofence {
             path.add(coordinate)
+        }
+        
+        // Close the shape by adding the first coordinate again
+        if let firstCoordinate = lastGeofence.first {
+            path.add(firstCoordinate)
         }
         
         let polygon = GMSPolygon(path: path)
@@ -94,8 +99,7 @@ class GeofenceManager: ObservableObject {
     ///Mark:- Helper function to check if a point is inside a polygon
     private func isPointInsidePolygon(point: CLLocationCoordinate2D, polygon: GMSPolygon) -> Bool {
         guard let path = polygon.path else { return false }
-        let bounds = GMSCoordinateBounds(path: path)
-        return bounds.contains(point)
+        return GMSGeometryContainsLocation(point, path, true)
     }
 
     ///Mark:- Calculate geofence center for mint marker placement

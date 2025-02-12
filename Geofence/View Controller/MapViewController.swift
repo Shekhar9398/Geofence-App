@@ -37,8 +37,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         updateUserLocationMarker()
         geofenceManager.loadGeofences(on: mapView)
         updateMapGestures()
+        addDrawingGesture()
 
-        ///Mark:- Listen for location updates and check geofence entry
         locationManager.onLocationUpdate = { [weak self] newLocation in
             guard let self = self else { return }
             self.updateUserLocationMarker()
@@ -54,7 +54,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         }
     }
 
-
     func updateMapGestures() {
         mapView.settings.scrollGestures = !isDrawingEnabled
         mapView.settings.zoomGestures = !isDrawingEnabled
@@ -62,7 +61,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         mapView.settings.tiltGestures = !isDrawingEnabled
     }
 
-    ///Mark:- Update user location marker instead of creating new ones
     private func updateUserLocationMarker() {
         guard let userLocation = locationManager.userLocation else { return }
 
@@ -72,7 +70,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             marker.position = userLocation
             CATransaction.commit()
         } else {
-            // Create the marker only once
             userLocationMarker = GMSMarker(position: userLocation)
             userLocationMarker?.title = "You are here"
             userLocationMarker?.icon = GMSMarker.markerImage(with: .red)
@@ -80,7 +77,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         }
     }
 
-    ///Mark:-  Function to allow drawing gestures for geofences
     private func addDrawingGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         panGesture.maximumNumberOfTouches = 1
@@ -105,47 +101,36 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             liveDrawingPolyline?.strokeWidth = 3
             liveDrawingPolyline?.map = mapView
 
-            print("[MapViewController] Started drawing geofence at \(coordinate)")
-
         case .changed:
             geofenceManager.addCoordinate(coordinate)
             liveDrawingPath?.add(coordinate)
             liveDrawingPolyline?.path = liveDrawingPath
 
         case .ended:
+            geofenceManager.finishDrawing(on: mapView)
             liveDrawingPolyline?.map = nil
             liveDrawingPolyline = nil
             liveDrawingPath = nil
-
-            geofenceManager.finishDrawing(on: mapView)
-            updateUserLocationMarker() // ✅ Keep user's location marker visible
-
-            print("[MapViewController] Finished drawing geofence at \(coordinate)")
 
         default:
             break
         }
     }
 
-    // Detect when a user taps on a geofence to select it
     func mapView(_ mapView: GMSMapView, didTap overlay: GMSOverlay) {
         if let polygon = overlay as? GMSPolygon {
             geofenceManager.selectedGeofence = polygon
-            print("[MapViewController] Selected Geofence \(geofenceManager.getSelectedGeofenceNumber() ?? 0)")
         }
     }
 
-    // Ensure user location marker updates when location changes
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-
         DispatchQueue.main.async {
             self.locationManager.userLocation = location.coordinate
             self.updateUserLocationMarker()
         }
     }
     
-    ///Mark:- trigger popUp when user enters in geofence
     private func showGeofencePopup() {
         let alert = UIAlertController(title: "Geofence Alert",
                                       message: "You have entered a geofenced area.",
@@ -153,5 +138,4 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
 }
