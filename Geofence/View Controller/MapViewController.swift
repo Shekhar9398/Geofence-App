@@ -62,20 +62,26 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     }
 
     private func updateUserLocationMarker() {
-        guard let userLocation = locationManager.userLocation else { return }
+            guard let userLocation = locationManager.userLocation else {
+                print("[MapViewController] No user location available to update marker.")
+                return
+            }
 
-        if let marker = userLocationMarker {
+            if userLocationMarker == nil {
+                userLocationMarker = GMSMarker()
+                userLocationMarker?.title = "You are here"
+                userLocationMarker?.icon = GMSMarker.markerImage(with: .red)
+                userLocationMarker?.map = mapView
+            }
+
+            // Smoothly animate marker movement
             CATransaction.begin()
-            CATransaction.setAnimationDuration(1.0)
-            marker.position = userLocation
+            CATransaction.setAnimationDuration(1.5) // Smooth transition over 1.5 seconds
+            userLocationMarker?.position = userLocation
             CATransaction.commit()
-        } else {
-            userLocationMarker = GMSMarker(position: userLocation)
-            userLocationMarker?.title = "You are here"
-            userLocationMarker?.icon = GMSMarker.markerImage(with: .red)
-            userLocationMarker?.map = mapView
+            
+            print("[MapViewController] User marker smoothly updated: \(userLocation.latitude), \(userLocation.longitude)")
         }
-    }
 
     private func addDrawingGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))

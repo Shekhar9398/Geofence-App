@@ -31,6 +31,7 @@
 		F49D60D22D5CA5D200B65C63 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F49D60D52D5CA5E700B65C63 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		F49D60D72D5CA61800B65C63 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		F49D60DA2D5CB35F00B65C63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 		F49D60C02D5CA52900B65C63 /* Geofence */ = {
 			isa = PBXGroup;
 			children = (
+				F49D60DA2D5CB35F00B65C63 /* Info.plist */,
 				F49D60C12D5CA52900B65C63 /* GeofenceApp.swift */,
 				F49D60D42D5CA5DF00B65C63 /* View */,
 				F49D60D92D5CA61D00B65C63 /* View Controller */,
@@ -385,6 +387,7 @@
 				DEVELOPMENT_TEAM = G6A84U52VG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Geofence/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need continuous location access for geofencing features.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need access to your location even when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide map services";
@@ -421,6 +424,7 @@
 				DEVELOPMENT_TEAM = G6A84U52VG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Geofence/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need continuous location access for geofencing features.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need access to your location even when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide map services";
